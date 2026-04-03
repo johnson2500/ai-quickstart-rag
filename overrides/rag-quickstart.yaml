@@ -2,10 +2,6 @@ llm-service:
   secret:
     enabled: false
 
-minio:
-  secret:
-    create: false
-
 pgvector:
   secret:
     create: false

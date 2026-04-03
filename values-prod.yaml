@@ -40,6 +40,11 @@ clusterGroup:
       extraValueFiles:
         - /overrides/rag-quickstart.yaml
       ignoreDifferences:
+        - group: ""
+          kind: Secret
+          name: minio
+          jsonPointers:
+            - /data
         - group: datasciencepipelinesapplications.opendatahub.io
           kind: DataSciencePipelinesApplication
           jsonPointers:
