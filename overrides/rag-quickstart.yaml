@@ -9,6 +9,9 @@ pgvector:
 configure-pipeline:
   secret:
     create: false
+  minio:
+    secret:
+      create: false
 
   sampleFileUpload:
     enabled: true
