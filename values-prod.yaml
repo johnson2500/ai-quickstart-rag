@@ -3,7 +3,10 @@ clusterGroup:
 
   namespaces:
     vault:
-    golang-external-secrets:
+    external-secrets:
+    external-secrets-operator:
+        operatorGroup: true
+        targetNamespaces: []
     redhat-ods-operator:
         operatorGroup: true
         targetNamespaces: []
@@ -13,6 +16,10 @@ clusterGroup:
     - /overrides/values-{{ $.Values.global.device }}-{{ $.Values.global.clusterPlatform }}.yaml
 
   subscriptions:
+    eso:
+      name: openshift-external-secrets-operator
+      namespace: external-secrets-operator
+      channel: stable-v1
     rhoai:
       name: rhods-operator
       namespace: redhat-ods-operator
@@ -30,6 +37,16 @@ clusterGroup:
       namespace: vault
       chart: hashicorp-vault
       chartVersion: 0.1.*
+
+    pattern-secrets:
+      name: pattern-secrets
+      namespace: ai-quickstart-rag-prod
+      path: charts/pattern-secrets
+
+    data-science-cluster:
+      name: data-science-cluster
+      namespace: ai-quickstart-rag-prod
+      path: charts/dsc
 
     rag-quickstart:
       name: rag-quickstart
@@ -55,13 +72,3 @@ clusterGroup:
           jsonPointers:
             - /spec/host
             - /spec/alternateBackends
-
-    pattern-secrets:
-      name: pattern-secrets
-      namespace: ai-quickstart-rag-prod
-      path: charts/pattern-secrets
-
-    data-science-cluster:
-      name: data-science-cluster
-      namespace: ai-quickstart-rag-prod
-      path: charts/dsc
