@@ -39,6 +39,22 @@ clusterGroup:
       path: deploy/helm/rag
       extraValueFiles:
         - /overrides/rag-quickstart.yaml
+      ignoreDifferences:
+        - group: datasciencepipelinesapplications.opendatahub.io
+          kind: DataSciencePipelinesApplication
+          jsonPointers:
+            - /spec
+        - group: kubeflow.org
+          kind: Notebook
+          jsonPointers:
+            - /spec
+            - /metadata/annotations
+            - /metadata/labels
+        - group: route.openshift.io
+          kind: Route
+          jsonPointers:
+            - /spec/host
+            - /spec/alternateBackends
 
     pattern-secrets:
       name: pattern-secrets
